@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+
+    a(href=`/students/edit${student.id}`) Edit Student
+    a(href=`/students/delete/${student.id}`) Delete Student
+    div
+        h3 Name: #{student.first_name} #{student.last_name}
+        p Grade Level: #{student.grade_level}
+
+        div.students
+            h Available Students
+            form(action=`/courses/${course.id}/enroll` method= 'post')
+                select(name='student' id='student' autocomplete=off)
+                each student in availbleStudents
+                    option(value= student.id) #{student.first_name}
+                    button.button(type='sumbit') Enroll
+
+                    h4 Enrolled Students
+                    table
+                        thead
